@@ -1,4 +1,5 @@
 import React from "react"
+const classNames = require('classnames');
 
 const MovieTabs = (props) => {
     const { sort_by, updateSortBy } = props;
@@ -9,7 +10,7 @@ const MovieTabs = (props) => {
     }
 
     const getClassLink = value => {
-        return `nav-link ${sort_by === value ? "active" : ""}`
+        return classNames({'nav-link': true, active: sort_by === value}) 
     }
 
     return (
