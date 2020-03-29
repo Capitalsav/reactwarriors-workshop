@@ -3,6 +3,7 @@ import { moviesData } from "../moviesData";
 import MovieItem from "./MovieItem";
 import { API_URL, API_KEY_3, API_KEY_4 } from "../utils/api"
 import MovieTabs from "./MovieTabs"
+import Pagination from "./Pagination"
 
 // UI = fn(state, props)
 
@@ -15,7 +16,8 @@ class App extends React.Component {
     this.state = {
       movies: moviesData,
       moviesWillWatch: [],
-      sort_by: "popularity.desc"
+      sort_by: "popularity.desc",
+      currentPage: 1
     };
   }
 
@@ -35,13 +37,15 @@ class App extends React.Component {
   }
 
   getMovies = () => {
-    fetch(`${API_URL}/discover/movie?api_key=${API_KEY_3}&sort_by=${this.state.sort_by}`).then((response) => {
+    fetch(`${API_URL}/discover/movie?api_key=${API_KEY_3}&sort_by=${this.state.sort_by}&page=${this.state.currentPage}`).then((response) => {
       console.log("then");
       return response.json()
     }).then((data) => {
       console.log("data", data);
+      console.log("pages", data.total_pages)
       this.setState({
-        movies: data.results
+        movies: data.results,
+        totalPages: data.total_pages
       })
     })
   }
@@ -82,6 +86,27 @@ class App extends React.Component {
     });
   };
 
+  nextPage = () => {
+    if (this.state.currentPage < this.state.totalPages) {
+      const nextPageNumber = this.state.currentPage += 1;
+      this.setState({
+        currentPage: nextPageNumber
+      })
+      this.getMovies();
+    }
+  }
+
+  prevPage = () => {
+    const minimalPage = 1;
+    if (this.state.currentPage > minimalPage) {
+      const prevPageNumber = this.state.currentPage -= 1;
+      this.setState({
+        currentPage: prevPageNumber
+      })
+      this.getMovies();
+    }
+  }
+
   render() {
     console.log("render", this);
     return (
@@ -91,6 +116,11 @@ class App extends React.Component {
             <div className="row mb-4">
               <div className="col-12">
                 <MovieTabs sort_by={this.state.sort_by} updateSortBy={this.updateSortBy}/>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-12">
+                <Pagination totalPages={this.state.totalPages} currentPage={this.state.currentPage} nextPage={this.nextPage} prevPage={this.prevPage}/>
               </div>
             </div>
             <div className="row">
