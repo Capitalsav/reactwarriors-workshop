@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/reactwarriors-workshop/static/css/main.7752b781.chunk.css",
-    "main.js": "/reactwarriors-workshop/static/js/main.5fbaa371.chunk.js",
-    "main.js.map": "/reactwarriors-workshop/static/js/main.5fbaa371.chunk.js.map",
+    "main.css": "/reactwarriors-workshop/static/css/main.c8b2d430.chunk.css",
+    "main.js": "/reactwarriors-workshop/static/js/main.fb1eeaad.chunk.js",
+    "main.js.map": "/reactwarriors-workshop/static/js/main.fb1eeaad.chunk.js.map",
     "runtime~main.js": "/reactwarriors-workshop/static/js/runtime~main.80877271.js",
     "runtime~main.js.map": "/reactwarriors-workshop/static/js/runtime~main.80877271.js.map",
     "static/css/2.0624914a.chunk.css": "/reactwarriors-workshop/static/css/2.0624914a.chunk.css",
-    "static/js/2.44c7a01c.chunk.js": "/reactwarriors-workshop/static/js/2.44c7a01c.chunk.js",
-    "static/js/2.44c7a01c.chunk.js.map": "/reactwarriors-workshop/static/js/2.44c7a01c.chunk.js.map",
+    "static/js/2.689d0735.chunk.js": "/reactwarriors-workshop/static/js/2.689d0735.chunk.js",
+    "static/js/2.689d0735.chunk.js.map": "/reactwarriors-workshop/static/js/2.689d0735.chunk.js.map",
     "index.html": "/reactwarriors-workshop/index.html",
-    "precache-manifest.10a394c79477aee4ead9be2dc11091e7.js": "/reactwarriors-workshop/precache-manifest.10a394c79477aee4ead9be2dc11091e7.js",
+    "precache-manifest.2a9d5e4376121ee14c9e6b1472634ec4.js": "/reactwarriors-workshop/precache-manifest.2a9d5e4376121ee14c9e6b1472634ec4.js",
     "service-worker.js": "/reactwarriors-workshop/service-worker.js",
     "static/css/2.0624914a.chunk.css.map": "/reactwarriors-workshop/static/css/2.0624914a.chunk.css.map",
-    "static/css/main.7752b781.chunk.css.map": "/reactwarriors-workshop/static/css/main.7752b781.chunk.css.map"
+    "static/css/main.c8b2d430.chunk.css.map": "/reactwarriors-workshop/static/css/main.c8b2d430.chunk.css.map"
   }
 }
