@@ -1,6 +1,9 @@
 import React from "react";
 import { moviesData } from "../moviesData";
 import MovieItem from "./MovieItem";
+import { API_URL, API_KEY_3, API_KEY_4 } from "../utils/api"
+import MovieTabs from "./MovieTabs"
+import Pagination from "./Pagination"
 
 // UI = fn(state, props)
 
@@ -12,8 +15,45 @@ class App extends React.Component {
 
     this.state = {
       movies: moviesData,
-      moviesWillWatch: []
+      moviesWillWatch: [],
+      sort_by: "popularity.desc",
+      currentPage: 1
     };
+  }
+
+  componentDidMount() {
+    console.log("didMount")
+    this.getMovies();
+    console.log("after fetch")
+  }
+
+  componentDidUpdate(prevPops, prevState) {
+    console.log("didUpdate");
+    console.log("prev", prevPops, prevState);
+    console.log("this", this.props, this.state);
+    if (prevState.sort_by !== this.state.sort_by) {
+      // console.log('11111');
+      // this.setState ({
+      //   currentPage: 1
+      // })
+      // console.log(this.state)
+      // console.log('222222');
+      this.getMovies();
+    }
+  }
+
+  getMovies = () => {
+    fetch(`${API_URL}/discover/movie?api_key=${API_KEY_3}&sort_by=${this.state.sort_by}&page=${this.state.currentPage}`).then((response) => {
+      console.log("then");
+      return response.json()
+    }).then((data) => {
+      console.log("data", data);
+      console.log("pages", data.total_pages)
+      this.setState({
+        movies: data.results,
+        totalPages: data.total_pages
+      })
+    })
   }
 
   deleteMovie = movie => {
@@ -46,12 +86,50 @@ class App extends React.Component {
     });
   };
 
+  updateSortBy = value => {
+    this.setState({
+      sort_by: value,
+      currentPage: 1
+    });
+  };
+
+  nextPage = () => {
+    if (this.state.currentPage < this.state.totalPages) {
+      const nextPageNumber = this.state.currentPage += 1;
+      this.setState({
+        currentPage: nextPageNumber
+      })
+      this.getMovies();
+    }
+  }
+
+  prevPage = () => {
+    const minimalPage = 1;
+    if (this.state.currentPage > minimalPage) {
+      const prevPageNumber = this.state.currentPage -= 1;
+      this.setState({
+        currentPage: prevPageNumber
+      })
+      this.getMovies();
+    }
+  }
+
   render() {
     console.log("render", this);
     return (
       <div className="container">
         <div className="row mt-4">
           <div className="col-9">
+            <div className="row mb-4">
+              <div className="col-12">
+                <MovieTabs sort_by={this.state.sort_by} updateSortBy={this.updateSortBy}/>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-12">
+                <Pagination totalPages={this.state.totalPages} currentPage={this.state.currentPage} nextPage={this.nextPage} prevPage={this.prevPage}/>
+              </div>
+            </div>
             <div className="row">
               {this.state.movies.map(movie => {
                 return (
