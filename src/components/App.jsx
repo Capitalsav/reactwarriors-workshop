@@ -32,6 +32,12 @@ class App extends React.Component {
     console.log("prev", prevPops, prevState);
     console.log("this", this.props, this.state);
     if (prevState.sort_by !== this.state.sort_by) {
+      // console.log('11111');
+      // this.setState ({
+      //   currentPage: 1
+      // })
+      // console.log(this.state)
+      // console.log('222222');
       this.getMovies();
     }
   }
@@ -82,7 +88,8 @@ class App extends React.Component {
 
   updateSortBy = value => {
     this.setState({
-      sort_by: value
+      sort_by: value,
+      currentPage: 1
     });
   };
 
